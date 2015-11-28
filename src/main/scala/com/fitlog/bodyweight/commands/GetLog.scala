@@ -14,13 +14,6 @@ class GetLog extends BodyWeightLogEntryTransformer with Command with SprayGet {
   override def path: String = "/log"
   override def idFormat(id: String) = s"/log/$id"
 
-  def getLog: Try[List[BodyWeightLogEntryOutput]] = Database.getLog match {
-    case Failure(ex) =>
-      log.error("unable to get log", ex.getStackTrace.mkString("\n\t"))
-      Failure(CommandException(GetLog.CommandName, "unable to get log"))
-    case l => l
-  }
-
   def execute[T](bean: Option[CommandBean]): Future[CommandResponse[T]] = {
     val p = Promise[CommandResponse[T]]
     Database.getLog match {
