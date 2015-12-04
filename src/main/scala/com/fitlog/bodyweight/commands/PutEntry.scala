@@ -1,6 +1,8 @@
 package com.fitlog.bodyweight.commands
 
-import com.fitlog.bodyweight._
+import com.fitlog.bodyweight.database.Database
+import com.fitlog.bodyweight.models.BodyWeightLogEntryOutput
+import com.fitlog.bodyweight.utils.{BodyWeightLogEntryExtract, BodyWeightLogEntryTransform}
 import com.webtrends.harness.command.{Command, CommandBean, CommandException, CommandResponse}
 import com.webtrends.harness.component.spray.route.SprayPut
 import spray.http.StatusCodes
@@ -8,7 +10,7 @@ import spray.http.StatusCodes
 import scala.concurrent.{Future, Promise}
 import scala.util.{Failure, Success, Try}
 
-class PutEntry extends BodyWeightLogEntryTransformer with Command with SprayPut{
+class PutEntry extends BodyWeightLogEntryTransform with BodyWeightLogEntryExtract with Command with SprayPut{
   implicit val executionContext = context.dispatcher
   override def responseStatusCode: StatusCodes.Success = StatusCodes.Created
   override def commandName = PostEntry.CommandName

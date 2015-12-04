@@ -1,13 +1,13 @@
-package com.fitlog.bodyweight
+package com.fitlog.bodyweight.databse
 
 import com.fitlog.bodyweight.commands.PostEntry
-import com.webtrends.harness.command.{CommandException, CommandBean}
+import com.webtrends.harness.command.{CommandBean, CommandException}
 import net.liftweb.json.ext.JodaTimeSerializers
-import net.liftweb.json.{NoTypeHints, Serialization, JObject}
+import net.liftweb.json.{JObject, NoTypeHints, Serialization}
 import org.joda.time.DateTime
 
 import scala.util.control.NonFatal
-import scala.util.{Success, Failure, Try}
+import scala.util.{Failure, Success, Try}
 
 
 sealed case class BodyWeightLogEntryInput(
